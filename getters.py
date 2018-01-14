@@ -16,6 +16,7 @@ from config import (
         DBDIR,
         DB,
         EXCHANGE_TABLE,
+        COIN_TABLE,
         )
 
 
@@ -25,9 +26,10 @@ def get_exchange(exchange):
     :return: a pandas DataFrame
     """
     with sqlite3.connect(os.path.join(DBDIR, DB)) as conn:
-        df = pd.read_sql_query("select * from %s where exchange = '%s'" % (EXCHANGE_TABLE, exchange.lower()),\
+        df = pd.read_sql_query("select * from %s where exchange = '%s'" % (EXCHANGE_TABLE, exchange.lower()),
                           conn)
     return df
+
 
 def get_exchanges(*exchanges):
     """
@@ -38,3 +40,15 @@ def get_exchanges(*exchanges):
     for exchange in exchanges:
         result[result] = get_exchange(exchange)
     return result
+
+
+def get_coin(coin):
+    """
+    Get information of a coin from database
+    :param coin: abbreviation of a cryptocurrency
+    :return: DataFrame
+    """
+    with sqlite3.connect(os.path.join(DBDIR, DB)) as conn:
+        df = pd.read_sql_query("select * from %s where [index] = '%s'" % (COIN_TABLE, coin.upper()), conn)
+    return df
+

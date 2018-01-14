@@ -23,7 +23,8 @@ API = {
     "exchange": "https://min-api.cryptocompare.com/data/all/exchanges",
         }
 PROXIES = {
-        'http': 
+        'http': 'http://j291414:TerranForce1!@',
+        'https': 'https://j291414:TerranForce1!@',
         }
 
 
