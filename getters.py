@@ -42,6 +42,22 @@ def get_exchanges(*exchanges):
     return result
 
 
+def get_exchange_by_pair(fsym, tsym):
+    """
+    Find out all exchanges trading the pair
+    :return: list of exchanges
+    """
+    fsym = fsym.upper()
+    tsym = tsym.upper()
+    with sqlite3.connect(os.path.join(DBDIR, DB)) as conn:
+        df = pd.read_sql_query("select exchange, pair from %s where _pair='%s'" % (EXCHANGE_TABLE, "/".join(sorted([fsym, tsym]))),
+                               conn)
+    if not df.empty:
+        return df
+    else:
+        return None
+
+
 def get_coin(coin):
     """
     Get information of a coin from database
@@ -51,4 +67,7 @@ def get_coin(coin):
     with sqlite3.connect(os.path.join(DBDIR, DB)) as conn:
         df = pd.read_sql_query("select * from %s where [index] = '%s'" % (COIN_TABLE, coin.upper()), conn)
     return df
+
+
+
 

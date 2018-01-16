@@ -9,10 +9,11 @@ A tester
 import sys
 sys.path.append("C:/Users/j291414/my algorithms/learning")
 
-import Cryptocurrency as cc
+import cryptocurrency as cc
+import os
 sys.modules[cc] = None
 reload(cc)
 
 proxies = cc.PROXIES
+path = os.path.join(cc.DBDIR, cc.DB)
 
-cc.data.update_coins(proxies)

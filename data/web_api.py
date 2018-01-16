@@ -50,7 +50,7 @@ def get_live(fsym, tsyms, exch, proxies=None):
     """
     Get live data for pairs
     """
-    to_symbols = ",".join(tsyms) if type(tsyms) == type([]) else tsyms
+    to_symbols = ",".join(tsyms) if not isinstance(tsyms, str) else tsyms
     url = API["price"] % (fsym.upper(), to_symbols.upper(), exch)
     with requests.Session() as session:
         r = session.get(url, proxies=proxies)

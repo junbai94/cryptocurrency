@@ -15,6 +15,7 @@ DBDIR = os.path.join(BASEDIR, 'data')
 
 # database name
 DB = 'data.db'
+DB_FULL_PATH = os.path.join(DBDIR, DB)
 
 # table names
 EXCHANGE_TABLE = 'exchanges'

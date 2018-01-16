@@ -25,14 +25,20 @@ from web_api import (
 
 
 def update_exchanges(proxies=None):
+    """
+    Pairs are sorted with lower value at front. then they are combined to a single
+    string
+    """
     exchanges = get_all_exchanges(PROXIES)
        
     with sqlite3.connect(os.path.join(DBDIR, DB)) as conn:
+        # wipe clean first and rewrite everything
         conn.execute("delete from %s" % EXCHANGE_TABLE)
         for exchange, pairs in exchanges.iteritems():
             for fsym, tsyms in pairs.iteritems():
-                conn.execute('insert into %s values (?, ?, ?)' % EXCHANGE_TABLE, 
-                             (exchange.lower(), fsym, json.dumps(tsyms)))
+                for tsym in tsyms:
+                    conn.execute("insert into %s values (?, ?, ?)" % EXCHANGE_TABLE,
+                                 (exchange.lower(), "/".join(sorted([fsym, tsym])), "/".join([fsym, tsym])))
             conn.commit()
     return True
 
