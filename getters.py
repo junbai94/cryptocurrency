@@ -58,7 +58,7 @@ def get_exchange_by_pair(fsym, tsym):
         return None
 
 
-def get_coin(coin):
+def get_coin_info(coin):
     """
     Get information of a coin from database
     :param coin: abbreviation of a cryptocurrency
