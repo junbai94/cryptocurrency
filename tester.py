@@ -17,3 +17,4 @@ reload(cc)
 proxies = cc.PROXIES
 path = os.path.join(cc.DBDIR, cc.DB)
 
+df = cc.get_pair_prices('btc', 'usd', proxies)

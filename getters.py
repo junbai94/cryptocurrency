@@ -19,6 +19,10 @@ from config import (
         COIN_TABLE,
         )
 
+from data import (
+    get_live,
+)
+
 
 def get_exchange(exchange):
     """
@@ -42,7 +46,7 @@ def get_exchanges(*exchanges):
     return result
 
 
-def get_exchange_by_pair(fsym, tsym):
+def get_exchanges_by_pair(fsym, tsym):
     """
     Find out all exchanges trading the pair
     :return: list of exchanges
@@ -56,6 +60,21 @@ def get_exchange_by_pair(fsym, tsym):
         return df
     else:
         return None
+
+
+def get_pair_prices(fsym, tsym, proxies=None):
+    """
+    Get all prices of a pair across exchanges
+    :return: DataFrame of prices of a pair across exchanges
+    """
+    df = get_exchanges_by_pair(fsym, tsym)
+    prices = list()
+    for i in range(len(df)):
+        frm, to = df['pair'][i].split(',')
+        exch = df['exchange'][i]
+        prices.append(get_live(frm, to, exch, proxies))
+    df['last'] = prices
+    return df
 
 
 def get_coin_info(coin):
