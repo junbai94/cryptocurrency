@@ -26,3 +26,7 @@ PROXIES = {
         'http': 'http://j291414:TerranForce1!@10.252.22.102:4200',
         'https': 'https://j291414:TerranForce1!@10.252.22.102:4200',
         }
+
+# potential targets
+HOTCOINS = ['BTC', 'ETH', 'LTC', 'XMR', 'XRP', 'ZEC', 'DASH']
+HOTEXS = ['coinbase', 'bittrex', 'kraken', 'bitfinex', 'gemini', 'poloniex']

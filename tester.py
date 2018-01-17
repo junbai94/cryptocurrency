@@ -7,7 +7,7 @@ Created on Wed Jan 10 17:22:55 2018
 A tester
 """
 import sys
-sys.path.append("C:/Users/j291414/my algorithms/learning")
+sys.path.append("C:/Users/j291414/my algorithms/gitHere")
 
 import cryptocurrency as cc
 import os

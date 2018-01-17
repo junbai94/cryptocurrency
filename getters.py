@@ -70,9 +70,9 @@ def get_pair_prices(fsym, tsym, proxies=None):
     df = get_exchanges_by_pair(fsym, tsym)
     prices = list()
     for i in range(len(df)):
-        frm, to = df['pair'][i].split(',')
+        frm, to = df['pair'][i].split('/')
         exch = df['exchange'][i]
-        prices.append(get_live(frm, to, exch, proxies))
+        prices.append(get_live(str(frm), str(to), str(exch), proxies))
     df['last'] = prices
     return df
 
